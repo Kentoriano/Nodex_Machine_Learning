@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Cases</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="text-white">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+   <div class="container">
+        <header class="border-bottom lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-3 pt-1">
+                    <h6>Netflix</h6>
+                </div>
+                <div class="col-6 text-center">
+                    <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Machine Cases</a>
+                </div>
+                <div class="col-3 d-flex justify-content-end align-items-center">
+                    <a class="link-secundary" href="#" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" 
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        class="mx-3" role="img" viewBox="0 0 24 24">
+                            <title>Search</title>
+                            <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                            <path d="M21 21l-5.2-5.2"></path>
+                        </svg>
+                    </a>
+                    <a class="link-secondary" href="#">Sign up</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline justify-content-between">
+                <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Recommender System</a>
+                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Machine Learning</a>                    
+            </nav>
+        </div>
+
+        <div class="container m-4">
+            <h4>Machine Learning in Netflix</h4>
+            <p>
+                Netflix uses Machine Learning to recommend movies and series based on user behavior.
+                Instead of showing the same content to everyone, the platform analyzes what you watch,
+                how long you watch it, and what you skip.
+            </p>
+
+            <a class="text-center" href="https://www.youtube.com/watch?v=GZAdCj8O8pQ"
+            target="_blank" rel="noopener noreferrer"> 
+                <img src="{{url_for('static', filename='img/netflix1.png')}}" 
+                class="img-fluid rounded shadow-sm"  
+                alt="Netflix ML">
+            </a>
+        </div>
+        
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-3">
+                <h4>Personalized experience</h4>
+                <img src="{{ url_for('static',filename='img/netflix2.jpeg')}}" 
+                class="img-fluid rounded shadow-sm" 
+                alt="Netflix personalization">
+                <p>
+                    Each user sees different recommendations based on their preferences.
+                    The system learns what you like and adapts continuously.
+                </p>
+            </div>
+
+            <div class="col-3">
+                <h4>Content discovery</h4>
+                <img src="{{ url_for('static',filename='img/netflix3.jpg')}}" 
+                class="img-fluid rounded shadow-sm" 
+                alt="Netflix recommendations">
+                <p>
+                    Machine Learning helps users find content faster, reducing the time
+                    spent searching and increasing engagement.
+                </p>
+            </div>
+
+            <div class="col-3">
+                <h5>The system analyzes variables such as:</h5>
+                <img src="{{ url_for('static',filename='img/netflix4.jpg')}}" 
+                class="img-fluid rounded shadow-sm"
+                alt="Netflix data">
+                <p>
+                    - Viewing history <br>
+                    - Watch time <br>
+                    - User ratings <br>
+                    - Similar users behavior
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

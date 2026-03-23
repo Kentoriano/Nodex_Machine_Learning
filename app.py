@@ -14,5 +14,11 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
+
+
+@app.route("/use_cases_netflix")
+def netflix():
+    return render_template("netflix.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
