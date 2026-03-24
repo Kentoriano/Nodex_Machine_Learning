@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #00c6ff;
+        }
+
+        h4 {
+            color: #4da6ff;
+        }
+
+        .card-custom {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .list-group-item {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container mt-5">
+
+
+    <h1 class="text-center mb-5">AI-Powered Fraud Detection System</h1>
+
+    <div class="card-custom mb-4">
+        <h4>Overview</h4>
+        <p>
+            Fraud detection systems use machine learning to identify suspicious financial transactions 
+            by analyzing patterns in large datasets. These systems help banks and companies prevent fraud 
+            before it causes significant damage.
+        </p>
+    </div>
+
+
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Problem</h4>
+                <p>
+                    Financial institutions process thousands of transactions every second, making it difficult 
+                    to manually detect fraudulent activity.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Solution</h4>
+                <p>
+                    Machine learning models analyze transaction patterns and detect anomalies in real time, 
+                    improving fraud detection accuracy and response time.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Benefits</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">Real-time fraud detection</li>
+                    <li class="list-group-item">Reduced financial losses</li>
+                    <li class="list-group-item">Improved customer security</li>
+                    <li class="list-group-item">Automated monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+ 
+    <div class="text-center mt-5">
+        <img src="{{ url_for('static', filename='img/security.jpg') }}" 
+             class="img-fluid rounded shadow"
+             style="max-width: 500px;"
+             alt="Fraud Detection">
+    </div>
+
+  
+    <footer class="text-center">
+        <p>Developed by David Estiven Sanchez Yomayuza</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
