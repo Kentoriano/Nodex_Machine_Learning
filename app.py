@@ -30,8 +30,6 @@ def form():
         result = predict_calories(model, duration)
 
     return render_template("form.html", result=result)
-@app.route("/sales")
-def sales():
-    return render_template("sales.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
