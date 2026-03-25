@@ -1,0 +1,32 @@
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+h1 {
+    font-weight: 700;
+    color: #00c6ff;
+}
+
+h4 {
+    color: #4da6ff;
+}
+
+.card-custom {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.list-group-item {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: 0.7;
+}

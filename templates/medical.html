@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical AI System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesdavid.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-3 pt-1">
+                <h6>Medical Diagnosis Assistant</h6>
+            </div>
+            <div class="col-6 text-center">
+                <h5 class="blog-header-logo text-decoration-none">
+                    Nodex Secure Software
+                </h5>
+            </div>
+            <div class="col-3 d-flex justify-content-end align-items-center">
+                <a class="link-secundary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" 
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    class="mx-3" role="img" viewBox="0 0 24 24">
+                        <title>Search</title>
+                        <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                        <path d="M21 21l-5.2-5.2"></path>
+                    </svg>
+                </a>
+                <a class="link-secondary" href="#">Sign up</a>
+            </div>
+        </div>
+    </header>
+
+        <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline justify-content-between">
+                <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
+                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Linear Regression</a>                    
+            </nav>
+        </div>
+
+        <h1 class="text-center mb-4">Medical Diagnosis Assistant</h1>
+    <div class="card-custom mb-4">
+        <h4>Overview</h4>
+        <p>
+            Machine learning is transforming healthcare by enabling systems to analyze medical data 
+            and assist in diagnosing diseases. By processing symptoms, patient history, and clinical 
+            records, AI can support doctors in making faster and more accurate decisions.
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+   
+    <div class="row text-center">
+
+        <!-- PROBLEM -->
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Problem</h4>
+                <p>
+                    Diagnosing diseases can be complex and time-consuming. Human error, limited time, 
+                    and large volumes of data make it difficult for healthcare professionals to 
+                    always provide accurate diagnoses quickly.
+                </p>
+            </div>
+        </div>
+
+        <!-- SOLUTION -->
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Solution</h4>
+                <p>
+                    Machine learning models analyze vast medical datasets to detect patterns 
+                    and anomalies. These systems assist doctors by suggesting possible diagnoses 
+                    based on data-driven insights.
+                </p>
+            </div>
+        </div>
+
+        
+        <div class="col-md-4">
+            <div class="card-custom">
+                <h4>Benefits</h4>
+                <ul class="list-unstyled">
+                    <li>Faster diagnosis</li>
+                    <li>Reduced human error</li>
+                    <li>Improved patient outcomes</li>
+                    <li>Data-driven decision making</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-name">
+        Developed by David Estiven Sanchez Yomayuza
+    </div>
+
+</div>
+
+</body>
+</html>
