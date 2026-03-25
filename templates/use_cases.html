@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en" data-bs-theme="dark">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -10,7 +10,7 @@
 <body class="text-white">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="container">
-        <header class="border-botton 1h-1 py-3">
+        <header class="border-bottom lh-1 py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-3 pt-1">
                     <h6>Use Cases</h6>
@@ -28,37 +28,102 @@
     </div>
 
    <div class="nav-scroller py-1 mb-3 border-bottom">
-                    <nav class="nav nav-underline justify-content-between">
-                        <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
-                        <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Linear Regression</a>
-                        <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Logistic Regression</a>
-                    </nav>
+        <nav class="nav nav-underline justify-content-between">
+            <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Linear Regression</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Logistic Regression</a>
+        </nav>
     </div>
-    <div class="row flex-nowrap justify-content-between align-items-center m-4"> 
-        <div class=" col-3">
+
+    <div class="row m-4"> 
+
+        <div class="col-3">
             <h4> Use Cases Kevin</h4>
             <a class="text-center" href="{{ url_for('alien')}}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ url_for('static',filename='img/m2.jpg')}}" class="img-fluid rounded shadow-sm" 
-            alt="Alien"></a>
+                <img src="{{ url_for('static',filename='img/m2.jpg')}}" class="img-fluid rounded shadow-sm" 
+                alt="Alien">
+            </a>
             <h4> Video game use case </h4>
             <p>
-                IMachine Learning in video games is used to create adaptive AI, meaning enemies or characters that learn from the player’s 
+                Machine Learning in video games is used to create adaptive AI, meaning enemies or characters that learn from the player’s 
                 behavior and adjust their strategy in real time.
             </p>   
             <p>
                 Instead of following fixed programmed patterns, the AI analyzes how you play
-                (aggressive, defensive, fast explorer, etc.) and modifies its difficult
+                (aggressive, defensive, fast explorer, etc.) and modifies its difficulty.
             </p> 
         </div>
-        <div class="col-3">
-            <h4>Use Cases David</h4>
+
+    <div class="col-md-3 text-center">
+    <h4>Use Case David 2</h4>
+
+    <a href="{{ url_for('medical') }}" target="_blank">
+        <img src="{{ url_for('static', filename='img/medical.jpg') }}" 
+             class="img-fluid rounded shadow-sm mb-2"
+             alt="Medical AI">
+    </a>
+
+    <h5>Medical Diagnosis Assistant</h5>
+
+    <p>
+        Machine learning can analyze symptoms and medical data to help doctors 
+        diagnose diseases faster and more accurately.
+    </p>
         </div>
+
         <div class="col-3">
             <h4>Use Cases Wilder</h4>
+
+            <a class="text-center" href="{{ url_for('netflix')}}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ url_for('static',filename='img/netflix1.png')}}" 
+                class="img-fluid rounded shadow-sm" 
+                alt="Netflix">
+            </a>
+
+            <h4> Streaming recommendation use case </h4>
+            <p>
+                Machine Learning in Netflix is used to recommend movies and series based on user behavior.
+                The platform analyzes what you watch, how long you watch it, and what you skip.
+            </p>
+
+            <p>
+                Instead of showing the same content to everyone, the system predicts what each user may like,
+                creating a personalized experience that increases engagement and retention.
+            </p>
         </div>
-        <div class="col-3">
-            <h4>Use Case Collaborative</h4>
-        </div>
-    </div>
+
+<div class="col-md-3">
+    <h4>Collaborator</h4>
+
+    <a href="{{ url_for('fraud') }}" target="_blank">
+        <img src="{{ url_for('static', filename='img/fraud.jpg') }}" 
+             class="img-fluid rounded shadow-sm mb-3"
+             alt="Fraud Detection">
+    </a>
+
+    <h5>Fraud Detection System</h5>
+
+    <p>
+        Machine learning helps detect fraudulent financial transactions 
+        by analyzing patterns and anomalies in real time.
+    </p>
+</div>
+
+<div class="col-md-3">
+    <h4>Use Case David</h4>
+    <a href="{{ url_for('sales') }}" target="_blank">
+        <img src="{{ url_for('static', filename='img/grafica.jpg') }}" 
+             class="img-fluid rounded shadow-sm mb-2">
+    </a>
+
+    <h5>Machine Learning</h5>
+    <p>
+        This use case demonstrates how machine learning models can analyze data 
+        patterns to generate accurate predictions and support decision-making.
+    </p>
+
+    <p>Machine learning for sales prediction using data.</p>
+</div>
+
 </body>
 </html>

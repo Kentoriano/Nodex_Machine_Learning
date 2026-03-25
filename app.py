@@ -14,5 +14,22 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
+
+
+@app.route("/use_cases_netflix")
+def netflix():
+    return render_template("netflix.html")
+
+@app.route("/fraud")
+def fraud():
+    return render_template("fraud.html")
+
+@app.route("/medical")
+def medical():
+    return render_template("medical.html")
+
+@app.route("/sales")
+def sales():
+    return render_template("sales.html")
 if __name__ == "__main__":
     app.run(debug=True)
