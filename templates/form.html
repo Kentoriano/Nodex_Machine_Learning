@@ -15,7 +15,9 @@
                     <h6>Lineal Regression</h6>
                 </div>
                 <div class="col-6 text-center">
-                    <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Machine Cases</a>
+                    <h5 class="blog-header-logo text-decoration-none">
+                        Nodex Secure Software
+                    </h5>
                 </div>
                 <div class="col-3 d-flex justify-content-end align-items-center">
                     <a class="link-secundary" href="#" aria-label="Search">
@@ -41,25 +43,30 @@
     </div>
 
     <div class="container">
-        <div class = "border rounded p-4 shadow-sm">
-            <h4>Calories Prediction</h4>
-            <form method="post">
-                <label>Exercise Duration (minutes):</label>
-                <input type="number" name="duration" required>
-                <br><br>
-                <button type="submit">Predict</button>
-            </form>
+        <div class="row align-items-center border rounded p-4 shadow-sm">
+            <div class = "col-md-8">
+                <h4>Calories Prediction</h4>
+                <h6>This page calculates how many calories you burn in a given amount of time while walking briskly (not jogging)</h6>
+                <form method="post">
+                    <label>Exercise Duration (minutes):</label>
+                    <input type="number" name="duration" required>
+                    <br><br>
+                    <button type="submit" class="btn-custom">Predict</button>
+                </form>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{{ url_for('static',filename='img/walk.png')}}" 
+                    class="img-fluid rounded shadow-sm mb-2 w-75">
+            </div>
         </div>
     </div>
-    
+    {% if result %}
     <div class="container mt-5">
-        <div class="border border-ligth rounded-4 shadow text-center">
-            {% if result %}
+        <div class="border border-light rounded-4 shadow text-center">
             <h2>Estimated Calories:</h2>
             <h3> {{result}}</h3>
-            {% endif %}
         </div>
-
     </div>
+    {% endif %}
 </body>
 </html>

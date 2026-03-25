@@ -9,3 +9,22 @@
     object-fit: cover;
     /* margin: 10px; */
 }
+
+.btn-custom {
+    background: linear-gradient(180deg, #051f44, #589bf8);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    background: linear-gradient(180deg, #589bf8, #051f44);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+    cursor: pointer;
+}
