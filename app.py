@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request
 import pickle
 from models.linear_regression import train_model, predict_calories
+from models.logistic_Regression import train_logistic, predict_watch
 
 app = Flask(__name__)
 
 # Load model
-model = train_model()
+Linear_model = train_model()
+Logistic_model = train_logistic()
 
 @app.route("/")
 def home():
@@ -27,7 +29,7 @@ def form():
     if request.method == "POST":
         duration = float(request.form["duration"])
 
-        result = predict_calories(model, duration)
+        result = predict_calories(Linear_model, duration)
 
     return render_template("form.html", result=result)
 
@@ -47,5 +49,27 @@ def medical():
 @app.route("/sales")
 def sales():
     return render_template("sales.html")
+
+@app.route("/watch", methods=["GET", "POST"])
+def watch():
+    result = None
+    probability = None
+
+    if request.method == "POST":
+        price = float(request.form["price"])
+        reviews = float(request.form["reviews"])
+        brand = request.form["brand"]
+
+        result, probability = predict_watch(price, reviews, brand)
+
+    return render_template("watch.html", result=result, probability=probability)
+
+
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
