@@ -43,7 +43,7 @@ def form():
     return render_template("form.html", result=result)
 
 @app.route("/iris", methods=["GET", "POST"])
-def lda():
+def ldaf():
     prediction = None
     probabilities = None
     if request.method == "POST":
