@@ -47,5 +47,9 @@ def medical():
 @app.route("/sales")
 def sales():
     return render_template("sales.html")
+
+@app.route('/lda')
+def lda():
+    return render_template('linear_discriminant_analysis.html')
 if __name__ == "__main__":
     app.run(debug=True)
