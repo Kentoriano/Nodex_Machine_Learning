@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request
-import pickle
 from models.linear_regression import train_model, predict_calories
+from models.iris_lda import train_model as train_lda_model, predict_species
 
 app = Flask(__name__)
-
-# Load model
-model = train_model()
+linear_model = train_model()
+lda_model, scaler, accuracy = train_lda_model()
 
 @app.route("/")
 def home():
@@ -18,19 +17,6 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
-
-# Linear Regression 
-@app.route("/form", methods=["GET", "POST"])
-def form():
-    result = None
-
-    if request.method == "POST":
-        duration = float(request.form["duration"])
-
-        result = predict_calories(model, duration)
-
-    return render_template("form.html", result=result)
-
 
 @app.route("/use_cases_netflix")
 def netflix():
@@ -47,5 +33,27 @@ def medical():
 @app.route("/sales")
 def sales():
     return render_template("sales.html")
+
+@app.route("/form", methods=["GET", "POST"])
+def form():
+    result = None
+    if request.method == "POST":
+        duration = float(request.form["duration"])
+        result = predict_calories(linear_model, duration)
+    return render_template("form.html", result=result)
+
+@app.route("/iris", methods=["GET", "POST"])
+def lda():
+    prediction = None
+    probabilities = None
+    if request.method == "POST":
+        sepal_length = float(request.form["sepal_length"])
+        sepal_width  = float(request.form["sepal_width"])
+        petal_length = float(request.form["petal_length"])
+        petal_width  = float(request.form["petal_width"])
+        values = [sepal_length, sepal_width, petal_length, petal_width]
+        prediction, probabilities = predict_species(lda_model, scaler, values)
+    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(accuracy * 100,2))
+
 if __name__ == "__main__":
     app.run(debug=True)
