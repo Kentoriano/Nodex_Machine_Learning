@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+import numpy as np
 from flask import Flask, render_template, request
 import pickle
 from models.linear_regression import train_model, predict_calories
@@ -25,13 +27,33 @@ def alien():
 @app.route("/form", methods=["GET", "POST"])
 def form():
     result = None
+    show_graph = False
 
     if request.method == "POST":
         duration = float(request.form["duration"])
 
         result = predict_calories(Linear_model, duration)
 
-    return render_template("form.html", result=result)
+        # Generate data for graph
+        x = np.linspace(0, 60, 100)
+        y = Linear_model.predict(x.reshape(-1, 1))
+
+        # Create graph
+        plt.figure()
+        plt.plot(x, y)  # regression line
+        plt.scatter(duration, result)  # user point
+
+        plt.xlabel("Duration")
+        plt.ylabel("Calories")
+        plt.title("Linear Regression Prediction")
+
+        # Save image
+        plt.savefig("static/img/graph.png")
+        plt.close()
+
+        show_graph = True
+
+    return render_template("form.html", result=result, show_graph=show_graph)
 
 
 @app.route("/use_cases_netflix")
@@ -65,7 +87,9 @@ def watch():
     return render_template("watch.html", result=result, probability=probability)
 
 
-
+@app.route('/linear-regression-concepts')
+def linear_regression_concepts():
+    return render_template('linear_regression_concepts.html')
 
 
 

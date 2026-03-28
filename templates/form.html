@@ -65,6 +65,12 @@
         <div class="border border-light rounded-4 shadow text-center">
             <h2>Estimated Calories:</h2>
             <h3> {{result}}</h3>
+            {% if show_graph %}
+    <div class="text-center mt-4">
+        <img src="{{ url_for('static', filename='img/graph.png') }}" 
+             class="img-fluid rounded shadow">
+    </div>
+{% endif %}
         </div>
     </div>
     {% endif %}
