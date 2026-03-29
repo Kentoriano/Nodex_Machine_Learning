@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistic Regression</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="text-white">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container">
+        <header class="border-bottom lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-3 pt-1">
+                    <h6>Watch</h6>
+                </div>
+                <div class="col-6 text-center">
+                    <h5 class="blog-header-logo text-decoration-none">
+                        Nodex Secure Software
+                    </h5>
+                </div>
+                <div class="col-3 text-center align-items-center">
+                    <a class="link-secondary" href="#">Sign up</a>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="nav-scroller py-1 mb-3 border-bottom">
+        <nav class="nav nav-underline justify-content-between">
+            <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('SML')}}">Supervised Machine Learning</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-start border rounded p-4 shadow-sm g-4">
+            <div class="col-md-5">
+                <h4>Watch Rating Predictor</h4>
+                <h6 class="text-secondary mb-4">
+                    Enter the watch details to predict whether it will have a good or low rating.
+                </h6>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" step="0.01" name="price"
+                            class="form-control" placeholder="e.g. 1999.99" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number of Reviews</label>
+                        <input type="number" name="reviews"
+                            class="form-control" placeholder="e.g. 450" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Brand</label>
+                        <select name="brand" class="form-select" required>
+                            <option value="">Select Brand</option>
+                            <option value="Casio">Casio</option>
+                            <option value="Titan">Titan</option>
+                            <option value="Seiko">Seiko</option>
+                            <option value="Citizen">Citizen</option>
+                            <option value="TIMEX">Timex</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-custom">Predict</button>
+                </form>
+
+                {% if result is not none %}
+                <div class="mt-4 p-3 border rounded-3">
+                    <h5>Prediction Result</h5>
+                    <div class="alert {% if result == 1 %}alert-success{% else %}alert-danger{% endif %} mb-2">
+                        <strong>
+                            {% if result == 1 %}
+                                Good Rating
+                            {% else %}
+                                Low Rating
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <p class="text-secondary mb-0">Probability of good rating: <strong>{{ probability }}%</strong></p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-7">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <h5 class="mb-0">Model Performance</h5>
+                    <span class="badge bg-success fs-6">Accuracy: {{ accuracy }}%</span>
+                </div>
+                <p class="text-secondary small mb-3">
+                    Evaluated on 20% of the dataset (test set).
+                </p>
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th></th>
+                            <th>Predicted: Low</th>
+                            <th>Predicted: Good</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="table-dark">Actual: Low</th>
+                            <td class="table-success fw-bold fs-5">{{ cm[0][0] }}</td>
+                            <td class="table-danger fw-bold fs-5">{{ cm[0][1] }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-dark">Actual: Good</th>
+                            <td class="table-danger fw-bold fs-5">{{ cm[1][0] }}</td>
+                            <td class="table-success fw-bold fs-5">{{ cm[1][1] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex gap-3 mt-2">
+                    <span class="badge bg-success px-3 py-2">Green = correct predictions</span>
+                    <span class="badge bg-danger px-3 py-2">Red = errors</span>
+                </div>
+                <div class="row g-3 mt-3">
+                    <div class="col-6 col-md-3">
+                        <div class="border rounded-3 p-3 text-center">
+                            <p class="text-secondary small mb-1">Accuracy</p>
+                            <h5 class="mb-0">{{ accuracy }}%</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="border rounded-3 p-3 text-center">
+                            <p class="text-secondary small mb-1">Precision</p>
+                            <h5 class="mb-0">{{ precision }}%</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="border rounded-3 p-3 text-center">
+                            <p class="text-secondary small mb-1">Recall</p>
+                            <h5 class="mb-0">{{ recall }}%</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="border rounded-3 p-3 text-center">
+                            <p class="text-secondary small mb-1">F1-Score</p>
+                            <h5 class="mb-0">{{ f1 }}%</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 border rounded-3">
+                    <h6 class="mb-2">How to read this matrix</h6>
+                    <ul class="text-secondary small mb-0">
+                        <li><strong class="text-white">Top-left (TN):</strong> predicted Low, actually Low</li>
+                        <li><strong class="text-white">Top-right (FP):</strong> predicted Good, actually Low</li>
+                        <li><strong class="text-white">Bottom-left (FN):</strong> predicted Low, actually Good</li>
+                        <li><strong class="text-white">Bottom-right (TP):</strong> predicted Good, actually Good</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
