@@ -4,7 +4,7 @@ from models.iris_lda import train_model as train_lda_model, predict_species
 
 app = Flask(__name__)
 linear_model = train_model()
-lda_model, scaler, accuracy = train_lda_model()
+lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph = train_lda_model()
 
 @app.route("/")
 def home():
@@ -53,7 +53,10 @@ def ldaf():
         petal_width  = float(request.form["petal_width"])
         values = [sepal_length, sepal_width, petal_length, petal_width]
         prediction, probabilities = predict_species(lda_model, scaler, values)
-    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(accuracy * 100,2))
+        
+    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(accuracy * 100,2), graph=graph, cm_graph=cm_graph, roc_graph=roc_graph,
+        precision=round(precision, 2), recall = round(recall, 2), f1 = round(f1, 2)
+    ) 
 
 
 @app.route('/lda')
