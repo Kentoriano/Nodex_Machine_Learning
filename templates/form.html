@@ -38,7 +38,7 @@
                     <nav class="nav nav-underline justify-content-between">
                         <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
                         <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
-                        <a class="nav-item nav-link-body-emphasis" href="{{ url_for('home')}}">Logistic Regression</a>                    
+                        <a class="nav-item nav-link-body-emphasis" href="{{ url_for('watch')}}">Logistic Regression</a>                    
                     </nav>
     </div>
 
@@ -65,6 +65,12 @@
         <div class="border border-light rounded-4 shadow text-center">
             <h2>Estimated Calories:</h2>
             <h3> {{result}}</h3>
+            {% if show_graph %}
+    <div class="text-center mt-4">
+        <img src="{{ url_for('static', filename='img/graph.png') }}" 
+             class="img-fluid rounded shadow">
+    </div>
+{% endif %}
         </div>
     </div>
     {% endif %}
