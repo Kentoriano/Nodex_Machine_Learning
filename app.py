@@ -7,9 +7,8 @@ from models.logistic_Regression import train_logistic, predict_watch
 
 app = Flask(__name__)
 
-# Load model
 Linear_model = train_model()
-Logistic_model = train_logistic()
+Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
 
 @app.route("/")
 def home():
@@ -22,8 +21,7 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
-
-# Linear Regression 
+ 
 @app.route("/form", methods=["GET", "POST"])
 def form():
     result = None
@@ -34,11 +32,9 @@ def form():
 
         result = predict_calories(Linear_model, duration)
 
-        # Generate data for graph
         x = np.linspace(0, 60, 100)
         y = Linear_model.predict(x.reshape(-1, 1))
 
-        # Create graph
         plt.figure()
         plt.plot(x, y)  # regression line
         plt.scatter(duration, result)  # user point
@@ -47,7 +43,6 @@ def form():
         plt.ylabel("Calories")
         plt.title("Linear Regression Prediction")
 
-        # Save image
         plt.savefig("static/img/graph.png")
         plt.close()
 
@@ -83,8 +78,11 @@ def watch():
         brand = request.form["brand"]
 
         result, probability = predict_watch(price, reviews, brand)
+        probability = round(float(probability) * 100, 2)
 
-    return render_template("watch.html", result=result, probability=probability)
+    return render_template("watch.html", result=result, probability=probability,
+                           cm=cm, accuracy=accuracy,
+                           precision=precision, recall=recall,f1=f1)
 
 
 @app.route('/linear-regression-concepts')
@@ -95,5 +93,3 @@ def linear_regression_concepts():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
