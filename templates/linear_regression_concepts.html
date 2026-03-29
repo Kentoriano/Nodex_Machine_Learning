@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Concepts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body class="text-white">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="px-4 py-3">
+
+    <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+
+            <div class="col-3 pt-1">
+                <h6>Linear Regression Concepts</h6>
+            </div>
+
+            <div class="col-6 text-center">
+                <h5 class="text-decoration-none">
+                    Nodex Secure Software
+                </h5>
+            </div>
+
+            <div class="col-3 d-flex justify-content-end align-items-center">
+                <a class="link-secondary" href="#">Search</a>
+                <a class="link-secondary ms-3" href="#">GitHub</a>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-3 border-bottom">
+        <nav class="nav nav-underline justify-content-between">
+            <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('SML')}}">Supervised Machine Learning</a>
+        </nav>
+    </div>
+
+
+    <!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Concepts</title>
+</head>
+
+<body>
+
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1>Linear Regression</h1>
+        <p class="text-secondary">
+            Machine learning model for predicting continuous values.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="card text-bg-dark border-light h-100">
+                <div class="card-body">
+                    <h5 class="card-title">What is it?</h5>
+                    <p class="card-text">
+                        Linear Regression is a supervised learning algorithm that finds
+                        the relationship between variables using a straight line.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-bg-dark border-light h-100">
+                <div class="card-body text-center">
+                    <img src="{{ url_for('static', filename='img/regression1.jpg') }}"
+                         class="img-fluid rounded"
+                         alt="Regression">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-bg-dark border-light h-100">
+                <div class="card-body">
+                    <h5 class="card-title">How it works</h5>
+                    <p class="card-text">
+                        The model finds the best fitting line that reduces the error
+                        between predicted and real values.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-bg-dark border-light h-100">
+                <div class="card-body text-center">
+                    <img src="{{ url_for('static', filename='img/regression2.jpg') }}"
+                         class="img-fluid rounded"
+                         alt="Graph">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card text-bg-dark border-light">
+                <div class="card-body">
+
+                    <h5 class="card-title">Applications</h5>
+
+                    <p class="card-text mb-0">
+                         House price prediction <br>
+                         Sales forecasting <br>
+                         Risk analysis <br>
+                         Stock prediction
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card text-bg-dark border-light">
+                <div class="card-body">
+                    <h5 class="card-title">Example</h5>
+                    <p class="card-text">
+                        If we predict house prices based on size,
+                        the model draws a line that estimates values for each square meter.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
