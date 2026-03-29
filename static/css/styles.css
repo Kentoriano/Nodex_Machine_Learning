@@ -29,8 +29,6 @@
     cursor: pointer;
 }
 
-/*test code for Scrool*/
-
 body{
     padding: 2rem 0rem;
     font-family: poppins;
@@ -116,7 +114,6 @@ body{
   position: relative;
 }
 
-/* The actual timeline */
 .main-timeline::after {
   content: "";
   position: absolute;
