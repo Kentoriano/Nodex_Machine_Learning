@@ -14,17 +14,16 @@
 
 <div class="px-4 py-3">
 
-    <!-- HEADER -->
     <header class="border-bottom lh-1 py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
 
             <div class="col-3 pt-1">
-                <h6>ML Project</h6>
+                <h6>Linear Regression Concepts</h6>
             </div>
 
             <div class="col-6 text-center">
                 <h5 class="text-decoration-none">
-                    Linear Regression Concepts
+                    Nodex Secure Software
                 </h5>
             </div>
 
@@ -36,29 +35,15 @@
         </div>
     </header>
 
-    <!-- NAV -->
     <div class="nav-scroller py-1 mb-3 border-bottom">
         <nav class="nav nav-underline justify-content-between">
-
-            <a class="nav-item nav-link active"
-               href="{{ url_for('use_cases') }}">
-               Use Cases
-            </a>
-
-            <a class="nav-item nav-link"
-               href="{{ url_for('linear_regression_concepts') }}">
-               Linear Regression
-            </a>
-
-            <a class="nav-item nav-link"
-               href="{{ url_for('watch') }}">
-               Logistic Regression
-            </a>
-
+            <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
+            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('SML')}}">Supervised Machine Learning</a>
         </nav>
     </div>
 
-    <!-- CONTENT -->
+
     <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -71,42 +56,6 @@
 <body>
 
 <div class="container mt-4">
-
-    <!-- NAVBAR SIMPLE (SIN CSS EXTRA) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-4">
-
-        <a class="navbar-brand" href="#">ML Project</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="nav">
-
-            <ul class="navbar-nav ms-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('use_cases') }}">Use Cases</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ url_for('linear_regression_concepts') }}">
-                        Linear Regression
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('watch') }}">
-                        Logistic Regression
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-    </nav>
-
-    <!-- TITLE -->
     <div class="text-center mb-4">
         <h1>Linear Regression</h1>
         <p class="text-secondary">
@@ -114,10 +63,8 @@
         </p>
     </div>
 
-    <!-- CARDS -->
     <div class="row g-4">
 
-        <!-- CARD 1 -->
         <div class="col-md-6">
             <div class="card text-bg-dark border-light h-100">
                 <div class="card-body">
@@ -130,7 +77,6 @@
             </div>
         </div>
 
-        <!-- CARD 2 IMAGE -->
         <div class="col-md-6">
             <div class="card text-bg-dark border-light h-100">
                 <div class="card-body text-center">
@@ -141,7 +87,6 @@
             </div>
         </div>
 
-        <!-- CARD 3 -->
         <div class="col-md-6">
             <div class="card text-bg-dark border-light h-100">
                 <div class="card-body">
@@ -154,7 +99,6 @@
             </div>
         </div>
 
-        <!-- CARD 4 IMAGE -->
         <div class="col-md-6">
             <div class="card text-bg-dark border-light h-100">
                 <div class="card-body text-center">
@@ -165,7 +109,6 @@
             </div>
         </div>
 
-        <!-- APPLICATIONS -->
         <div class="col-12">
             <div class="card text-bg-dark border-light">
                 <div class="card-body">
@@ -183,7 +126,6 @@
             </div>
         </div>
 
-        <!-- EXAMPLE -->
         <div class="col-12">
             <div class="card text-bg-dark border-light">
                 <div class="card-body">

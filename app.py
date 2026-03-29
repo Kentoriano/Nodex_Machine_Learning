@@ -89,7 +89,22 @@ def watch():
 def linear_regression_concepts():
     return render_template('linear_regression_concepts.html')
 
+@app.route('/concepts_logistic')
+def concepts_logistic():
+    return render_template('conceptsLR.html')
 
+
+@app.route('/SML')
+def SML():
+    return render_template('SML.html')
+
+@app.route('/linear_menu')
+def linear_menu():
+    return render_template('linear_menu.html')
+
+@app.route('/logistic_menu')
+def logistic_menu():
+    return render_template('logistic_menu.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

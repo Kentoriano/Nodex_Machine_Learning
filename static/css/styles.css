@@ -103,12 +103,12 @@ body{
 }
 
 .image-1 {
-  background: url("/static/img/watch_1.jpg") 50% 50%
+  background: url("/static/img/watch_1.jpeg") 50% 50%
     no-repeat;
   background-size: cover;
 }
 .image-2 {
-    background: url("/static/img/watch_2.jpg") 50% 50% no-repeat;
+    background: url("/static/img/watch_2.jpeg") 50% 50% no-repeat;
     background-size: cover;
 }
 
