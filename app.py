@@ -7,7 +7,7 @@ from models.logistic_Regression import train_logistic, predict_watch
 
 app = Flask(__name__)
 linear_model = train_model()
-lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph = train_lda_model()
+lda_model, scaler, lda_accuracy, graph, cm_graph, lda_precision, lda_recall, lda_f1, roc_graph = train_lda_model()
 Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
 
 @app.route("/")
@@ -30,10 +30,10 @@ def form():
     if request.method == "POST":
         duration = float(request.form["duration"])
 
-        result = predict_calories(Linear_model, duration)
+        result = predict_calories(linear_model, duration)
 
         x = np.linspace(0, 60, 100)
-        y = Linear_model.predict(x.reshape(-1, 1))
+        y = linear_model.predict(x.reshape(-1, 1))
 
         plt.figure()
         plt.plot(x, y)  # regression line
@@ -97,8 +97,8 @@ def ldaf():
         values = [sepal_length, sepal_width, petal_length, petal_width]
         prediction, probabilities = predict_species(lda_model, scaler, values)
         
-    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(accuracy * 100,2), graph=graph, cm_graph=cm_graph, roc_graph=roc_graph,
-        precision=round(precision, 2), recall = round(recall, 2), f1 = round(f1, 2)
+    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(lda_accuracy * 100,2), graph=graph, cm_graph=cm_graph, roc_graph=roc_graph,
+        precision=round(lda_precision, 2), recall = round(lda_recall, 2), f1 = round(lda_f1, 2)
     ) 
 
 

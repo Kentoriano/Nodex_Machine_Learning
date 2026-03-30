@@ -28,11 +28,10 @@
         </header>
     </div>
 
-    <div class="nav-scroller py-1 mb-3 border-bottom">
-        <nav class="nav nav-underline justify-content-between">
-            <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
-            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
-            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('SML')}}">Supervised Machine Learning</a>
+    <div class="nav-scroller py-1 mb-3 border-bottom ">
+        <nav class="nav nav-underline justify-content-around    ">
+            <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
         </nav>
     </div>
 
@@ -42,7 +41,7 @@
             <nav class="col-md-2 border-end py-4 d-flex flex-column gap-2">
                 <a href="{{ url_for('linear_menu') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Linear Regression</a>
                 <a href="{{ url_for('logistic_menu') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Logistic Regression</a>
-                <a href="{{ url_for('watch') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Linear Discriminant Analysis</a>
+                <a href="{{ url_for('ldaf') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Linear Discriminant Analysis</a>
             </nav>
 
             <main class="col-md-10 py-4 px-4">

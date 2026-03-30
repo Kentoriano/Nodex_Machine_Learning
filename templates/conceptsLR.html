@@ -26,14 +26,137 @@
             </div>
         </header>
 
-        <div class="nav-scroller py-1 mb-3 border-bottom">
-            <nav class="nav nav-underline justify-content-between">
-                <a class="nav-item nav-link-body-emphasis active" href="{{ url_for('home')}}">Home</a>
-                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('use_cases')}}">Use Cases</a>
-                <a class="nav-item nav-link-body-emphasis" href="{{ url_for('SML')}}">Supervised Machine Learning</a>
+        <div class="nav-scroller py-1 mb-3 border-bottom ">
+            <nav class="nav nav-underline justify-content-around    ">
+                <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
+                <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
             </nav>
         </div>
     </div>
+
+    <div class="container m-6">
+        <div class="row align-items-center g-4">
+            <div class="card-group">         
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">What logistic regression is</h5>
+                            <p class="card-text">Logistic regression is a supervised learning algorithm used to solve 
+                                classification problems, particularly when the output variable is categorical (e.g., “yes” or 
+                                “no,” “high” or “low”). Unlike linear regression, this model uses a logistic (sigmoid) function to 
+                                estimate the probability that a data point belongs to a specific class. It is widely used in areas such 
+                                as fraud detection, medical diagnosis, and customer analysis due to its simplicity and interpretability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Difference between regression and classification</h5>
+                            <p class="card-text">
+                                The difference between regression and classification lies in the type of output variable being predicted. Regression 
+                                is used when the output is a continuous numerical value, such as house price or temperature, whereas classification is 
+                                used when the output is a category or class, such as “pass/fail” or “fraud/no fraud.” In other words, regression aims to 
+                                estimate quantities, while classification focuses on assigning labels to data based on their features.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Binary classification</h5>
+                            <p class="card-text">
+                                Binary classification is a type of supervised learning problem in which the model must assign each data point to one of 
+                                two possible classes, such as “yes/no,” “positive/negative,” or “fraud/no fraud.” The goal is to learn patterns from labeled 
+                                data in order to accurately predict the class of new, unseen data. It is widely used in applications such as spam detection, 
+                                medical diagnosis, and recommendation systems.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container m-6 mt-3">
+        <div class="row align-items-center g-4">
+            <div class="card-group">
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Target variable </h5>
+                            <p class="card-text">
+                                In the logistic regression model for watch classification, the independent variables (features) include price, brand, 
+                                and number of reviews. These variables are used to predict the target variable, which in this case is the watch rating, 
+                                classified into categories such as “Good” or “Low.” The model analyzes how these features influence the probability of a 
+                                watch receiving a good rating.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Features and predictors </h5>
+                            <p class="card-text">
+                                Features or predictors are the input variables that a model uses to make predictions. In the watch logistic regression model, 
+                                these include characteristics such as price, brand, and number of reviews, as they provide relevant information about each product.
+                                 These variables allow the model to identify patterns and relationships that help estimate the probability of a watch being rated as 
+                                 “Good” or “Low.”
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Probability estimation </h5>
+                            <p class="card-text">
+                                Probability estimation is the process by which a model, such as logistic regression, calculates the likelihood that an observation belongs
+                                 to a specific class. In the watch model, the algorithm uses variables like price, brand, and number of reviews to estimate the probability 
+                                 that a watch has a “Good” rating. This value typically ranges between 0 and 1 and is then compared to a threshold (e.g., 0.5) to make a final 
+                                 classification decision.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container m-6 mt-3">
+        <div class="row align-items-center g-4">
+            <div class="card-group">
+                <div class="col-md-6">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Decision boundary</h5>
+                            <p class="card-text">
+                                The decision boundary is the threshold or limit that a model uses to separate different classes in the feature space.
+                                In logistic regression, this boundary is defined based on variables such as price, brand, and number of reviews, and it 
+                                determines whether a data point is classified as “Good” or “Low.” Essentially, it is the line (or surface in higher dimensions) 
+                                where the predicted probability equals a chosen threshold, typically 0.5.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-bg-dark border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Classification threshold</h5>
+                            <p class="card-text">
+                                The classification threshold is the cutoff value that determines how a model assigns an observation to a class in binary classification problems. 
+                                In the watch logistic regression model, for instance, if the estimated probability that a watch is “Good” is greater than or equal to the threshold
+                                (commonly 0.5), the model classifies it as “Good”; otherwise, it is classified as “Low.” Adjusting this threshold can help balance precision and recall 
+                                depending on the analysis objectives.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
 
 
     <div class="hr-line mt-4 mb-4"></div>
