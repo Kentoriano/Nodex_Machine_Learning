@@ -123,6 +123,10 @@ def concepts_logistic():
 def SML():
     return render_template('SML.html')
 
+@app.route('/UML')
+def UML():
+    return render_template('UML.html')
+
 @app.route('/linear_menu')
 def linear_menu():
     return render_template('linear_menu.html')

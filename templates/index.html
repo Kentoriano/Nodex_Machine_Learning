@@ -27,70 +27,68 @@
     </header>
 </div>
 
-    <div class="nav-scroller py-1 mb-3 border-bottom ">
-        <nav class="nav nav-underline justify-content-around    ">
-            <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('home') }}">Home</a>
-            <a class="nav-item nav-link link-body-emphasis " href="{{ url_for('SML') }}">Supervised Machine Learning</a>
-            <a class="nav-item nav-link-body-emphasis" href="{{ url_for('unsupervised_concepts')}}">Unsupervised Machine Learning</a>
-        </nav>
+<div class="nav-scroller py-1 mb-3 border-bottom ">
+    <nav class="nav nav-underline justify-content-around    ">
+        <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('home') }}">Home</a>
+        <a class="nav-item nav-link link-body-emphasis " href="{{ url_for('SML') }}">Supervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('UML')}}">Unsupervised Machine Learning</a>
+    </nav>
+</div>
+
+<div class="row m-4"> 
+
+    <div class="col-3">
+        <h4> Use Cases Kevin</h4>
+        <a class="text-center" href="{{ url_for('alien')}}" target="_blank" rel="noopener noreferrer">
+            <img src="{{ url_for('static',filename='img/m2.jpg')}}" class="img-fluid rounded shadow-sm" 
+            alt="Alien">
+        </a>
+        <h4> Video game use case </h4>
+        <p>
+            Machine Learning in video games is used to create adaptive AI, meaning enemies or characters that learn from the player’s 
+            behavior and adjust their strategy in real time.
+        </p>   
+        <p>
+            Instead of following fixed programmed patterns, the AI analyzes how you play
+            (aggressive, defensive, fast explorer, etc.) and modifies its difficulty.
+        </p> 
     </div>
 
-    <div class="row m-4"> 
+<div class="col-md-3 text-center">
+<h4>Use Case David 2</h4>
 
-        <div class="col-3">
-            <h4> Use Cases Kevin</h4>
-            <a class="text-center" href="{{ url_for('alien')}}" target="_blank" rel="noopener noreferrer">
-                <img src="{{ url_for('static',filename='img/m2.jpg')}}" class="img-fluid rounded shadow-sm" 
-                alt="Alien">
-            </a>
-            <h4> Video game use case </h4>
-            <p>
-                Machine Learning in video games is used to create adaptive AI, meaning enemies or characters that learn from the player’s 
-                behavior and adjust their strategy in real time.
-            </p>   
-            <p>
-                Instead of following fixed programmed patterns, the AI analyzes how you play
-                (aggressive, defensive, fast explorer, etc.) and modifies its difficulty.
-            </p> 
-        </div>
+<a href="{{ url_for('medical') }}" target="_blank">
+    <img src="{{ url_for('static', filename='img/medical.jpg') }}" 
+        class="img-fluid rounded shadow-sm mb-2"
+        alt="Medical AI">
+</a>
 
-    <div class="col-md-3 text-center">
-    <h4>Use Case David 2</h4>
+<h5>Medical Diagnosis Assistant</h5>
 
-    <a href="{{ url_for('medical') }}" target="_blank">
-        <img src="{{ url_for('static', filename='img/medical.jpg') }}" 
-             class="img-fluid rounded shadow-sm mb-2"
-             alt="Medical AI">
-    </a>
+<p>
+    Machine learning can analyze symptoms and medical data to help doctors 
+    diagnose diseases faster and more accurately.
+</p>
+    </div>
+    <div class="col-3">
+        <h4>Use Cases Wilder</h4>
 
-    <h5>Medical Diagnosis Assistant</h5>
+        <a class="text-center" href="{{ url_for('netflix')}}" target="_blank" rel="noopener noreferrer">
+            <img src="{{ url_for('static',filename='img/netflix1.png')}}" 
+            class="img-fluid rounded shadow-sm" 
+            alt="Netflix">
+        </a>
 
-    <p>
-        Machine learning can analyze symptoms and medical data to help doctors 
-        diagnose diseases faster and more accurately.
-    </p>
-        </div>
-
-        <div class="col-3">
-            <h4>Use Cases Wilder</h4>
-
-            <a class="text-center" href="{{ url_for('netflix')}}" target="_blank" rel="noopener noreferrer">
-                <img src="{{ url_for('static',filename='img/netflix1.png')}}" 
-                class="img-fluid rounded shadow-sm" 
-                alt="Netflix">
-            </a>
-
-            <h4> Streaming recommendation use case </h4>
-            <p>
-                Machine Learning in Netflix is used to recommend movies and series based on user behavior.
-                The platform analyzes what you watch, how long you watch it, and what you skip.
-            </p>
-
-            <p>
-                Instead of showing the same content to everyone, the system predicts what each user may like,
-                creating a personalized experience that increases engagement and retention.
-            </p>
-        </div>
+        <h4> Streaming recommendation use case </h4>
+        <p>
+            Machine Learning in Netflix is used to recommend movies and series based on user behavior.
+            The platform analyzes what you watch, how long you watch it, and what you skip.
+        </p>
+        <p>
+            Instead of showing the same content to everyone, the system predicts what each user may like,
+            creating a personalized experience that increases engagement and retention.
+        </p>
+    </div>
 
 <div class="col-md-3">
     <h4>Collaborator</h4>
