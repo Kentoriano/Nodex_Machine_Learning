@@ -22,9 +22,6 @@ data = data.drop("MINIMUM_PAYMENTS", axis=1)
 data = data.drop("PRC_FULL_PAYMENT", axis=1)
 
 
-data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
-data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
-
 data = data.reset_index(drop=True) 
 
 
