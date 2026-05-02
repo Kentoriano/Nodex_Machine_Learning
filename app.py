@@ -5,6 +5,7 @@ from models.linear_regression import train_model, predict_calories
 from models.iris_lda import train_model as train_lda_model, predict_species
 from models.logistic_Regression import train_logistic, predict_watch
 from models.unsupervised_algorithm import run_analysis
+from models.K_means_steps import run_kmeans_steps
 
 
 unsupervised_results = run_analysis()
@@ -142,13 +143,12 @@ def unsupervised_concepts():
 
 @app.route('/unsupervised_example')
 def unsupervised_example():
-    return render_template('unsupervised_example.html')
+    return render_template('unsupervised_example.html', kmeans_results = run_kmeans_steps() )
 
 
 @app.route('/unsupervised_Test')
 def unsupervised_Test():
     return render_template('unsupervised_Test.html', results=unsupervised_results)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
