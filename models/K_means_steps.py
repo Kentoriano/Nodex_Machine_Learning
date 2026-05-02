@@ -20,7 +20,7 @@ data = data.drop("PURCHASES_TRX", axis=1)
 data = data.drop("CREDIT_LIMIT", axis=1)
 data = data.drop("MINIMUM_PAYMENTS", axis=1)
 data = data.drop("PRC_FULL_PAYMENT", axis=1)
-
+data = data.sample(500, random_state=42)
 
 data = data.reset_index(drop=True) 
 

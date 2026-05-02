@@ -128,6 +128,7 @@ def run_analysis():
     """Run the full K-Means pipeline and return all results as a dict."""
     # ── 1. Load & clean ─────────────────────────────────────────
     df_raw = pd.read_csv('data/CC GENERAL.csv')
+    df_raw = df_raw.sample(500, random_state=42)
     df_model = df_raw.drop(columns=['CUST_ID'])
 
     imputer = SimpleImputer(strategy='median')
