@@ -23,7 +23,7 @@ data = data.drop("PRC_FULL_PAYMENT", axis=1)
 
 
 data = data.reset_index(drop=True) 
-
+data = data.sample(500, random_state=42)
 
 
 def calculate_distances(X, centroids):
