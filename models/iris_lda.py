@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as pt
 import io
+import os
 import base64
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, roc_curve, auc
@@ -90,7 +91,10 @@ def plot_roc_curve(model, X_test, y_test):
 
 
 def train_model():
-    data = pd.read_csv("data/iris.csv")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(BASE_DIR, "data", "iris.csv")
+
+    data = pd.read_csv(file_path)
     X = data[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
     y = data["Species"]
 
