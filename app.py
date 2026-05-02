@@ -4,6 +4,11 @@ from flask import Flask, render_template, request
 from models.linear_regression import train_model, predict_calories
 from models.iris_lda import train_model as train_lda_model, predict_species
 from models.logistic_Regression import train_logistic, predict_watch
+from models.unsupervised_algorithm import run_analysis
+from models.K_means_steps import run_kmeans_steps
+
+
+unsupervised_results = run_analysis()
 
 app = Flask(__name__)
 linear_model = train_model()
@@ -119,6 +124,10 @@ def concepts_logistic():
 def SML():
     return render_template('SML.html')
 
+@app.route('/UML')
+def UML():
+    return render_template('UML.html')
+
 @app.route('/linear_menu')
 def linear_menu():
     return render_template('linear_menu.html')
@@ -126,6 +135,20 @@ def linear_menu():
 @app.route('/logistic_menu')
 def logistic_menu():
     return render_template('logistic_menu.html')
+
+@app.route('/unsupervised_concepts')
+def unsupervised_concepts():
+    return render_template('unsupervised_concepts.html')
+
+
+@app.route('/unsupervised_example')
+def unsupervised_example():
+    return render_template('unsupervised_example.html', kmeans_results = run_kmeans_steps() )
+
+
+@app.route('/unsupervised_Test')
+def unsupervised_Test():
+    return render_template('unsupervised_Test.html', results=unsupervised_results)
 
 if __name__ == "__main__":
     app.run(debug=True)
