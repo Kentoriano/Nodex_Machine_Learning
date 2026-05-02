@@ -151,4 +151,4 @@ def unsupervised_Test():
     return render_template('unsupervised_Test.html', results=unsupervised_results)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+    app.run(debug=True)
