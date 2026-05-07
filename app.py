@@ -5,14 +5,14 @@ from models.linear_regression import train_model, predict_calories
 from models.iris_lda import train_model as train_lda_model, predict_species
 from models.logistic_Regression import train_logistic, predict_watch
 from models.unsupervised_algorithm import run_analysis
-
+from models.K_means_steps import run_kmeans_steps
 
 app = Flask(__name__)
 linear_model = None 
 lda_model = None
 Logistic_model = None
 unsupervised_results = None
-
+k_means_result = None
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -155,7 +155,10 @@ def unsupervised_concepts():
 
 @app.route('/unsupervised_example')
 def unsupervised_example():
-    return render_template('unsupervised_example.html')
+    global k_means_result
+    if k_means_result is None:
+        k_means_result = run_kmeans_steps()
+    return render_template('unsupervised_example.html', kmeans_results = k_means_result )
 
 
 @app.route('/unsupervised_Test')
