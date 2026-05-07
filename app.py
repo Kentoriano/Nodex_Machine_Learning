@@ -96,6 +96,9 @@ def watch():
                            cm=cm, accuracy=accuracy,
                            precision=precision, recall=recall,f1=f1)
 
+@app.route('/lda_menu')
+def lda_menu():
+    return render_template('lda_menu.html')
 
 @app.route("/iris", methods=["GET", "POST"])
 def ldaf():
