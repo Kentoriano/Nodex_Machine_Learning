@@ -6,29 +6,6 @@ import base64
 import io
 
 
-data = pd.read_csv("data/CC GENERAL.csv")
-data = data.drop("CUST_ID", axis=1)
-data = data.fillna(data.mean())
-data = data.drop_duplicates()
-
-data = data.drop("ONEOFF_PURCHASES", axis=1)
-data = data.drop("INSTALLMENTS_PURCHASES", axis=1)
-data = data.drop("CASH_ADVANCE", axis=1)
-data = data.drop("PURCHASES_FREQUENCY", axis=1)
-data = data.drop("ONEOFF_PURCHASES_FREQUENCY", axis=1)
-data = data.drop("PURCHASES_INSTALLMENTS_FREQUENCY", axis=1)
-data = data.drop("CASH_ADVANCE_FREQUENCY", axis=1)
-data = data.drop("CASH_ADVANCE_TRX", axis=1)
-data = data.drop("PURCHASES_TRX", axis=1)
-data = data.drop("CREDIT_LIMIT", axis=1)
-data = data.drop("MINIMUM_PAYMENTS", axis=1)
-data = data.drop("PRC_FULL_PAYMENT", axis=1)
-
-
-data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
-data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
-
-data = data.reset_index(drop=True) 
 
 def fig_to_base64():
     buf = io.BytesIO()
@@ -84,7 +61,9 @@ def run_kmeans_steps():
         "PAYMENTS"
     ]]
 
-  
+    data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
+    data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
+
     data = data.reset_index(drop=True)
 
     scaler = StandardScaler()
