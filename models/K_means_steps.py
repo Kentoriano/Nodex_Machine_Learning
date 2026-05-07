@@ -138,7 +138,7 @@ def run_kmeans_steps():
     plt.ylabel("Variance")
     plt.title("Variance Evolution")
 
-    plt.savefig("static/img/variance.png")
+    plt.savefig("/tmp/variance.png")
     plt.close()
 
 
@@ -154,14 +154,14 @@ def run_kmeans_steps():
     plt.ylabel("PURCHASES (scaled)")
     plt.title("Final Clusters")
 
-    plt.savefig("static/img/clusters.png")
+    plt.savefig("/tmp/clusters.png")
     plt.close()
 
     return {
         "initial_data": data.head(30).to_dict(orient="records"),  
         "iterations": iterations_data,
         "variances": variances,
-        "variance_img": "img/variance.png",
-        "clusters_img": "img/clusters.png",
+        "variance_img": "/tmp/variance.png",
+        "clusters_img": "/tmp/clusters.png",
         "final_message": "Variance decreases across iterations, indicating improved clustering and convergence."
     }
