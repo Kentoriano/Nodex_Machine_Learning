@@ -2,6 +2,9 @@ from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import base64
+import io
+
 
 data = pd.read_csv("data/CC GENERAL.csv")
 data = data.drop("CUST_ID", axis=1)
@@ -27,7 +30,12 @@ data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
 
 data = data.reset_index(drop=True) 
 
-
+def fig_to_base64():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+    buf.seek(0)
+    return base64.b64encode(buf.read()).decode('utf-8')
 
 def calculate_distances(X, centroids):
     distances = []
@@ -76,23 +84,19 @@ def run_kmeans_steps():
         "PAYMENTS"
     ]]
 
-    # Remove outliers
-    data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
-    data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
-
+  
     data = data.reset_index(drop=True)
 
-    # 🔹 Scaling
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(data)
 
-    # 🔹 Initial centroids (MANUAL selection)
+
     centroids = X_scaled[[0, 50, 100]]
 
     k = 3
     iterations_data = []
 
-    # 🔹 Run ONLY 3 iterations
+
     for iteration in range(3):
 
         distances = calculate_distances(X_scaled, centroids)
@@ -113,7 +117,7 @@ def run_kmeans_steps():
 
         table = table.head(30)
 
-        # 🔹 Variance
+  
         variance = calculate_variance(X_scaled, centroids, labels)
 
         iterations_data.append({
@@ -123,45 +127,35 @@ def run_kmeans_steps():
             "variance": float(variance)
         })
 
-        # 🔹 Update centroids
+     
         centroids = recalculate_centroids(X_scaled, labels, k)
 
-    # 🔹 Final comparison
-    variances = [it["variance"] for it in iterations_data]
 
     variances = [it["variance"] for it in iterations_data]
+
 
     plt.figure()
     plt.plot(range(1, len(variances)+1), variances, marker='o')
-
     plt.xlabel("Iteration")
     plt.ylabel("Variance")
     plt.title("Variance Evolution")
+    variance_img = fig_to_base64()
 
-    plt.savefig("/tmp/variance.png")
-    plt.close()
 
 
     plt.figure()
-
-    plt.scatter(
-        X_scaled[:, 0],   # BALANCE
-        X_scaled[:, 2],   # PURCHASES
-        c=labels
-    )
-
+    plt.scatter(X_scaled[:, 0], X_scaled[:, 2], c=labels)
     plt.xlabel("BALANCE (scaled)")
     plt.ylabel("PURCHASES (scaled)")
     plt.title("Final Clusters")
-
-    plt.savefig("/tmp/clusters.png")
-    plt.close()
+    clusters_img = fig_to_base64()
 
     return {
-        "initial_data": data.head(30).to_dict(orient="records"),  
+        "initial_data": data.head(30).to_dict(orient="records"),
         "iterations": iterations_data,
         "variances": variances,
-        "variance_img": "/tmp/variance.png",
-        "clusters_img": "/tmp/clusters.png",
+        "variance_img": variance_img,
+        "clusters_img": clusters_img,
         "final_message": "Variance decreases across iterations, indicating improved clustering and convergence."
+
     }
