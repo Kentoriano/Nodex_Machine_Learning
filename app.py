@@ -6,13 +6,12 @@ from models.iris_lda import train_model as train_lda_model, predict_species
 from models.logistic_Regression import train_logistic, predict_watch
 from models.unsupervised_algorithm import run_analysis
 
-# Run full unsupervised analysis once on startup and cache results
-unsupervised_results = run_analysis()
 
 app = Flask(__name__)
-linear_model = train_model()
-lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph = train_lda_model()
-Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
+linear_model = None 
+lda_model = None
+Logistic_model = None
+unsupervised_results = None
 
 @app.route("/")
 def home():
@@ -25,9 +24,14 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
- 
+
+
 @app.route("/form", methods=["GET", "POST"])
 def form():
+    global linear_model
+    if linear_model is None:
+        linear_model = train_model()
+
     result = None
     show_graph = False
 
@@ -73,6 +77,10 @@ def sales():
 
 @app.route("/watch", methods=["GET", "POST"])
 def watch():
+
+    global Logistic_model, cm, accuracy, precision, recall, f1
+    if Logistic_model is None:
+        Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
     result = None
     probability = None
 
@@ -91,6 +99,9 @@ def watch():
 
 @app.route("/iris", methods=["GET", "POST"])
 def ldaf():
+    global  lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph
+    if lda_model is None:
+        lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph = train_lda_model()
     prediction = None
     probabilities = None
     if request.method == "POST":
@@ -149,6 +160,9 @@ def unsupervised_example():
 
 @app.route('/unsupervised_Test')
 def unsupervised_Test():
+    global unsupervised_results
+    if unsupervised_results is None:
+        unsupervised_results = run_analysis()
     return render_template('unsupervised_Test.html', results=unsupervised_results)
 
 if __name__ == "__main__":
