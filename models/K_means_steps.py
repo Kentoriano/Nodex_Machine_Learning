@@ -2,32 +2,16 @@ from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-data = pd.read_csv("data/CC GENERAL.csv")
-data = data.drop("CUST_ID", axis=1)
-data = data.fillna(data.mean())
-data = data.drop_duplicates()
-
-data = data.drop("ONEOFF_PURCHASES", axis=1)
-data = data.drop("INSTALLMENTS_PURCHASES", axis=1)
-data = data.drop("CASH_ADVANCE", axis=1)
-data = data.drop("PURCHASES_FREQUENCY", axis=1)
-data = data.drop("ONEOFF_PURCHASES_FREQUENCY", axis=1)
-data = data.drop("PURCHASES_INSTALLMENTS_FREQUENCY", axis=1)
-data = data.drop("CASH_ADVANCE_FREQUENCY", axis=1)
-data = data.drop("CASH_ADVANCE_TRX", axis=1)
-data = data.drop("PURCHASES_TRX", axis=1)
-data = data.drop("CREDIT_LIMIT", axis=1)
-data = data.drop("MINIMUM_PAYMENTS", axis=1)
-data = data.drop("PRC_FULL_PAYMENT", axis=1)
+import base64
+import io
 
 
-data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
-data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
-
-data = data.reset_index(drop=True) 
-
-
+def fig_to_base64():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+    buf.seek(0)
+    return base64.b64encode(buf.read()).decode('utf-8')
 
 def calculate_distances(X, centroids):
     distances = []
@@ -60,10 +44,9 @@ def calculate_variance(X, centroids, labels):
 
 def run_kmeans_steps():
 
-    # 🔹 Load data
+
     data = pd.read_csv("data/CC GENERAL.csv")
 
-    # 🔹 Preprocessing
     data = data.drop("CUST_ID", axis=1)
     data = data.fillna(data.mean())
     data = data.drop_duplicates()
@@ -76,23 +59,21 @@ def run_kmeans_steps():
         "PAYMENTS"
     ]]
 
-    # Remove outliers
     data = data[data["BALANCE"] < data["BALANCE"].quantile(0.99)]
     data = data[data["PURCHASES"] < data["PURCHASES"].quantile(0.99)]
 
     data = data.reset_index(drop=True)
 
-    # 🔹 Scaling
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(data)
 
-    # 🔹 Initial centroids (MANUAL selection)
+
     centroids = X_scaled[[0, 50, 100]]
 
     k = 3
     iterations_data = []
 
-    # 🔹 Run ONLY 3 iterations
+
     for iteration in range(3):
 
         distances = calculate_distances(X_scaled, centroids)
@@ -113,7 +94,7 @@ def run_kmeans_steps():
 
         table = table.head(30)
 
-        # 🔹 Variance
+  
         variance = calculate_variance(X_scaled, centroids, labels)
 
         iterations_data.append({
@@ -123,47 +104,34 @@ def run_kmeans_steps():
             "variance": float(variance)
         })
 
-        # 🔹 Update centroids
+     
         centroids = recalculate_centroids(X_scaled, labels, k)
 
-    # 🔹 Final comparison
-    variances = [it["variance"] for it in iterations_data]
 
     variances = [it["variance"] for it in iterations_data]
+
 
     plt.figure()
     plt.plot(range(1, len(variances)+1), variances, marker='o')
-
     plt.xlabel("Iteration")
     plt.ylabel("Variance")
     plt.title("Variance Evolution")
+    variance_img = fig_to_base64()
 
-    plt.savefig("static/img/variance.png")
-    plt.close()
 
 
     plt.figure()
-
-    plt.scatter(
-        X_scaled[:, 0],   # BALANCE
-        X_scaled[:, 2],   # PURCHASES
-        c=labels
-    )
-
+    plt.scatter(X_scaled[:, 0], X_scaled[:, 2], c=labels)
     plt.xlabel("BALANCE (scaled)")
     plt.ylabel("PURCHASES (scaled)")
     plt.title("Final Clusters")
-
-    plt.savefig("static/img/clusters.png")
-    plt.close()
+    clusters_img = fig_to_base64()
 
     return {
-        "initial_data": data.head(30).to_dict(orient="records"),  
+        "initial_data": data.head(30).to_dict(orient="records"),
         "iterations": iterations_data,
         "variances": variances,
-        "variance_img": "img/variance.png",
-        "clusters_img": "img/clusters.png",
+        "variance_img": variance_img,
+        "clusters_img": clusters_img,
         "final_message": "Variance decreases across iterations, indicating improved clustering and convergence."
     }
-
- 

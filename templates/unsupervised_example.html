@@ -28,7 +28,7 @@
     <nav class="nav nav-underline justify-content-around    ">
         <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
         <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
-        <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('UML')}}">Unsupervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('USML')}}">Unsupervised Machine Learning</a>
     </nav>
 </div>
 
@@ -168,11 +168,11 @@
 
     <div>
         <h4>Variance Graph</h4>
-        <img src="{{ url_for('static', filename=kmeans_results.variance_img) }}" class="img-fluid">
+        <img src="data:image/png;base64,{{ kmeans_results.variance_img }}" class="img-fluid">
     </div>
     <div>
         <h4>Final Clusters Visualization</h4>
-        <img src="{{ url_for('static', filename=kmeans_results.clusters_img) }}" class="img-fluid">
+        <img src="data:image/png;base64,{{ kmeans_results.clusters_img }}" class="img-fluid">
     </div>
 
 </div>

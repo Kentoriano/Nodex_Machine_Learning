@@ -7,14 +7,12 @@ from models.logistic_Regression import train_logistic, predict_watch
 from models.unsupervised_algorithm import run_analysis
 from models.K_means_steps import run_kmeans_steps
 
-
-unsupervised_results = run_analysis()
-
 app = Flask(__name__)
-linear_model = train_model()
-lda_model, scaler, lda_accuracy, graph, cm_graph, lda_precision, lda_recall, lda_f1, roc_graph = train_lda_model()
-Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
-
+linear_model = None 
+lda_model = None
+Logistic_model = None
+unsupervised_results = None
+k_means_result = None
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -26,9 +24,14 @@ def use_cases():
 @app.route("/use_cases_alien")
 def alien():
     return render_template("alien.html")
- 
+
+
 @app.route("/form", methods=["GET", "POST"])
 def form():
+    global linear_model
+    if linear_model is None:
+        linear_model = train_model()
+
     result = None
     show_graph = False
 
@@ -74,6 +77,10 @@ def sales():
 
 @app.route("/watch", methods=["GET", "POST"])
 def watch():
+
+    global Logistic_model, cm, accuracy, precision, recall, f1
+    if Logistic_model is None:
+        Logistic_model, cm, accuracy, precision, recall, f1 = train_logistic()
     result = None
     probability = None
 
@@ -92,6 +99,9 @@ def watch():
 
 @app.route("/iris", methods=["GET", "POST"])
 def ldaf():
+    global  lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph
+    if lda_model is None:
+        lda_model, scaler, accuracy, graph, cm_graph, precision, recall, f1, roc_graph = train_lda_model()
     prediction = None
     probabilities = None
     if request.method == "POST":
@@ -102,8 +112,8 @@ def ldaf():
         values = [sepal_length, sepal_width, petal_length, petal_width]
         prediction, probabilities = predict_species(lda_model, scaler, values)
         
-    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(lda_accuracy * 100,2), graph=graph, cm_graph=cm_graph, roc_graph=roc_graph,
-        precision=round(lda_precision, 2), recall = round(lda_recall, 2), f1 = round(lda_f1, 2)
+    return render_template("iris.html", prediction=prediction, probabilities=probabilities, accuracy=round(accuracy * 100,2), graph=graph, cm_graph=cm_graph, roc_graph=roc_graph,
+        precision=round(precision, 2), recall = round(recall, 2), f1 = round(f1, 2)
     ) 
 
 
@@ -124,9 +134,10 @@ def concepts_logistic():
 def SML():
     return render_template('SML.html')
 
-@app.route('/UML')
-def UML():
-    return render_template('UML.html')
+@app.route('/USML')
+def USML():
+    return render_template('USML.html')
+
 
 @app.route('/linear_menu')
 def linear_menu():
@@ -136,6 +147,7 @@ def linear_menu():
 def logistic_menu():
     return render_template('logistic_menu.html')
 
+# Unsupervised Learning routes
 @app.route('/unsupervised_concepts')
 def unsupervised_concepts():
     return render_template('unsupervised_concepts.html')
@@ -143,11 +155,17 @@ def unsupervised_concepts():
 
 @app.route('/unsupervised_example')
 def unsupervised_example():
-    return render_template('unsupervised_example.html', kmeans_results = run_kmeans_steps() )
+    global k_means_result
+    if k_means_result is None:
+        k_means_result = run_kmeans_steps()
+    return render_template('unsupervised_example.html', kmeans_results = k_means_result )
 
 
 @app.route('/unsupervised_Test')
 def unsupervised_Test():
+    global unsupervised_results
+    if unsupervised_results is None:
+        unsupervised_results = run_analysis()
     return render_template('unsupervised_Test.html', results=unsupervised_results)
 
 if __name__ == "__main__":
