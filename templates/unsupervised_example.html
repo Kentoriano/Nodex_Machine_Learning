@@ -168,11 +168,11 @@
 
     <div>
         <h4>Variance Graph</h4>
-        <img src="{{ url_for('static', filename=kmeans_results.variance_img) }}" class="img-fluid">
+        <img src="data:image/png;base64,{{ kmeans_results.variance_img }}" class="img-fluid">
     </div>
     <div>
         <h4>Final Clusters Visualization</h4>
-        <img src="{{ url_for('static', filename=kmeans_results.clusters_img) }}" class="img-fluid">
+        <img src="data:image/png;base64,{{ kmeans_results.clusters_img }}" class="img-fluid">
     </div>
 
 </div>
