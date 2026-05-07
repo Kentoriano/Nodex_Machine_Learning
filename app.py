@@ -34,10 +34,10 @@ def form():
     if request.method == "POST":
         duration = float(request.form["duration"])
 
-        result = predict_calories(Linear_model, duration)
+        result = predict_calories(linear_model, duration)
 
         x = np.linspace(0, 60, 100)
-        y = Linear_model.predict(x.reshape(-1, 1))
+        y = linear_model.predict(x.reshape(-1, 1))
 
         plt.figure()
         plt.plot(x, y)  # regression line
