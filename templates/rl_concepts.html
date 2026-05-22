@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning - Basic Concepts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="text-white">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container">
+    <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-3 pt-1">
+                <h6>Reinforcement Learning</h6>
+            </div>
+            <div class="col-6 text-center">
+                <h5 class="blog-header-logo text-decoration-none">
+                    Nodex Secure Software
+                </h5>
+            </div>
+            <div class="col-3 text-center align-items-center">
+                <a class="link-secondary" href="#">Sign up</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-around">
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('UML') }}">Unsupervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('RL') }}">Reinforcement Learning</a>
+    </nav>
+</div>
+
+<div class="container">
+    <div>.</div>
+    <div class="row align-items-start border rounded p-4 shadow-sm g-4">
+        <div class="col-md-12">
+
+            <h4>Reinforcement Learning – Basic Concepts</h4>
+
+            <h5 class="mt-4">What is Reinforcement Learning?</h5>
+            <p>
+                Reinforcement Learning (RL) is a branch of machine learning where an agent
+                learns to make decisions by interacting with an environment. Unlike supervised
+                learning, no labeled dataset is required. Instead, the agent receives rewards
+                or penalties based on the actions it takes, and gradually learns which actions lead to
+                the best long-term outcome.
+            </p>
+            <p>
+                The core idea is simple: the agent tries different actions, observes the consequences,
+                and updates its behavior to maximize cumulative reward over time — very similar to how
+                humans and animals learn through trial and error.
+            </p>
+
+            <h5 class="mt-4">RL vs. Other Machine Learning Paradigms</h5>
+            <table class="table table-dark table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Supervised Learning</th>
+                        <th>Unsupervised Learning</th>
+                        <th>Reinforcement Learning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Input</td>
+                        <td>Labeled data (input + output)</td>
+                        <td>Unlabeled data</td>
+                        <td>Observations from environment</td>
+                    </tr>
+                    <tr>
+                        <td>Feedback</td>
+                        <td>Correct answer at each step</td>
+                        <td>None</td>
+                        <td>Delayed reward signal</td>
+                    </tr>
+                    <tr>
+                        <td>Goal</td>
+                        <td>Predict a known output</td>
+                        <td>Discover hidden structure</td>
+                        <td>Maximize cumulative reward</td>
+                    </tr>
+                    <tr>
+                        <td>Examples</td>
+                        <td>Regression, Classification</td>
+                        <td>Clustering, PCA</td>
+                        <td>Game agents, Robotics, Routing</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 class="mt-4">Intelligent Agent</h5>
+            <p>
+                An intelligent agent is the decision-making entity in a Reinforcement Learning
+                system. It perceives the current state of the environment, selects an action based on a policy,
+                and receives feedback in the form of a reward. Over many iterations, the agent refines its
+                decision-making strategy to achieve its objective more effectively.
+            </p>
+            <p>
+                Examples of intelligent agents include: a robot navigating a warehouse, a program playing
+                chess, a self-driving car choosing a route, or a recommendation system selecting content
+                for a user.
+            </p>
+
+            <h5 class="mt-4">Environment</h5>
+            <p>
+                The environment is everything outside the agent — the world the agent
+                interacts with. It receives the agent's actions and responds by transitioning to a new
+                state and providing a reward signal. The environment can be:
+            </p>
+            <ul>
+                <li>Deterministic: The same action always leads to the same result.</li>
+                <li>Stochastic: Actions can lead to different outcomes with some probability.</li>
+                <li>Fully observable: The agent sees the complete state of the environment.</li>
+                <li>Partially observable: The agent only sees part of the environment.</li>
+            </ul>
+
+            <h5 class="mt-4">States</h5>
+            <p>
+                A state is a snapshot of the environment at a given moment. It contains
+                all the information the agent needs to decide what action to take next. For example, in a
+                maze, a state could be the agent's current position (row, column). States form the foundation
+                of the agent's perception of the world.
+            </p>
+
+            <h5 class="mt-4">Actions</h5>
+            <p>
+                Actions are the choices available to the agent in each state. The set of
+                all possible actions is called the action space. Actions can be discrete (e.g.,
+                move up, down, left, right) or continuous (e.g., steering angle of a vehicle). The agent
+                must learn which action to take in each state to maximize its reward over time.
+            </p>
+
+            <h5 class="mt-4">Rewards</h5>
+            <p>
+                A reward is a numerical signal the environment sends back to the agent
+                after each action. It indicates how good or bad the action was in the current state.
+                The agent's ultimate goal is to maximize the total accumulated reward (called
+                cumulative reward or return) over a full episode or over time.
+            </p>
+            <ul>
+                <li>Positive reward: Encourages the agent to repeat the action.</li>
+                <li>Negative reward (penalty): Discourages the agent from taking that action.</li>
+                <li>Zero reward: Neutral — the action neither helped nor hurt.</li>
+            </ul>
+
+            <h5 class="mt-4">Policies</h5>
+            <p>
+                A policy (π) is the agent's strategy — a mapping from states to actions.
+                It defines what the agent does in every possible situation. Policies can be:
+            </p>
+            <ul>
+                <li>Deterministic: π(s) → a — always picks the same action for a given state.</li>
+                <li>Stochastic: π(a|s) — assigns a probability to each action in a given state.</li>
+            </ul>
+            <p>
+                The learning process in RL consists of finding the optimal policy π* that
+                maximizes cumulative reward across all states.
+            </p>
+
+            <h5 class="mt-4">Exploration vs. Exploitation</h5>
+            <p>
+                One of the central challenges in Reinforcement Learning is the
+                exploration–exploitation tradeoff:
+            </p>
+            <ul>
+                <li>
+                    Exploitation: The agent uses its current knowledge to select the
+                    action it believes is best — maximizing known reward.
+                </li>
+                <li>
+                    Exploration: The agent tries new, uncertain actions to discover
+                    potentially better strategies it hasn't encountered yet.
+                </li>
+            </ul>
+            <p>
+                A common approach to balance both is the ε-greedy strategy: with
+                probability ε (epsilon), the agent explores randomly; with probability 1−ε, it exploits
+                the best known action. As training progresses, ε is typically reduced so the agent
+                gradually focuses more on exploitation.
+            </p>
+
+            <h5 class="mt-4">The Learning Process</h5>
+            <p>
+                The RL learning cycle follows a continuous loop:
+            </p>
+            <ol>
+                <li>The agent observes the current state (s).</li>
+                <li>It selects an action (a) based on its policy.</li>
+                <li>The environment transitions to a new state (s').</li>
+                <li>The agent receives a reward (r).</li>
+                <li>The agent updates its knowledge (e.g., Q-table or neural network weights).</li>
+                <li>The cycle repeats until a terminal state or episode limit is reached.</li>
+            </ol>
+            <p>
+                Over many episodes (complete runs from start to terminal state),
+                the agent accumulates experience and progressively improves its policy.
+            </p>
+
+            <h5 class="mt-4">Key Algorithms</h5>
+            <table class="table table-dark table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Q-Learning</td>
+                        <td>Model-free, off-policy</td>
+                        <td>Learns a Q-table mapping (state, action) → expected reward. Simple and effective for discrete spaces.</td>
+                    </tr>
+                    <tr>
+                        <td>SARSA</td>
+                        <td>Model-free, on-policy</td>
+                        <td>Similar to Q-Learning but updates based on the action actually taken, making it more conservative.</td>
+                    </tr>
+                    <tr>
+                        <td>Deep Q-Network (DQN)</td>
+                        <td>Model-free, off-policy</td>
+                        <td>Uses a neural network to approximate Q-values, enabling RL in high-dimensional or continuous state spaces.</td>
+                    </tr>
+                    <tr>
+                        <td>Policy Gradient (REINFORCE)</td>
+                        <td>Model-free, on-policy</td>
+                        <td>Directly optimizes the policy by gradient ascent on expected cumulative reward.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 class="mt-4">Real-World Applications</h5>
+            <ul>
+                <li>Gaming: AlphaGo (Go), OpenAI Five (Dota 2), agents that beat human champions.</li>
+                <li>Robotics: Teaching robotic arms to grasp objects, bipedal locomotion.</li>
+                <li>Autonomous vehicles: Path planning, lane keeping, collision avoidance.</li>
+                <li>Finance: Algorithmic trading strategies that adapt to market conditions.</li>
+                <li>Healthcare: Personalized treatment policies and drug dosage optimization.</li>
+                <li>Supply chain: Inventory management and delivery route optimization.</li>
+                <li>Natural language: Fine-tuning language models with human feedback (RLHF).</li>
+            </ul>
+
+            <div class="mt-4">
+                <a href="#" class="btn btn-custom">
+                    Next: Intelligent Agent Application →
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

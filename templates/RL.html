@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="text-white">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container">
+        <header class="border-bottom lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-3 pt-1">
+                    <h6>Reinforcement Learning</h6>
+                </div>
+                <div class="col-6 text-center">
+                    <h5 class="blog-header-logo text-decoration-none">
+                        Nodex Secure Software
+                    </h5>
+                </div>
+                <div class="col-3 text-center align-items-center">
+                    <a class="link-secondary" href="#">Sign up</a>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="nav-scroller py-1 mb-3 border-bottom">
+        <nav class="nav nav-underline justify-content-around">
+            <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
+            <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('UML') }}">Unsupervised Machine Learning</a>
+            <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('RL') }}">Reinforcement Learning</a>
+        </nav>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <nav class="col-md-2 border-end py-4 d-flex flex-column gap-2">
+                <a href="{{ url_for('rl_concepts') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Basic Concepts</a>
+                <a href="#" class="nav-link link-body-emphasis px-3 py-2 rounded text-secondary">Intelligent Agent Application</a>
+            </nav>
+
+            <main class="col-md-10 py-4 px-4">
+                <h4>Reinforcement Learning</h4>
+                <p class="text-secondary mb-4">Select a section from the sidebar to get started.</p>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="border rounded p-4 h-100">
+                            <h5 class="mb-3">Basic Concepts</h5>
+                            <p class="text-secondary">
+                                Explore the fundamental principles of Reinforcement Learning: intelligent agents,
+                                environments, states, actions, rewards, policies, and the
+                                exploration vs. exploitation tradeoff.
+                            </p>
+                            <a href="{{ url_for('rl_concepts') }}" class="btn btn-custom mt-2">Go to Concepts</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded p-4 h-100">
+                            <h5 class="mb-3">Intelligent Agent Application</h5>
+                            <p class="text-secondary">
+                                See a functional Q-Learning agent in action: maze navigation environment,
+                                training episodes, reward progression, learned policy, and
+                                interactive visualizations.
+                            </p>
+                            <span class="badge bg-secondary mt-2">Coming soon</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+</html>

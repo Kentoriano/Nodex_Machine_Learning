@@ -150,5 +150,13 @@ def unsupervised_example():
 def unsupervised_Test():
     return render_template('unsupervised_Test.html', results=unsupervised_results)
 
+@app.route('/RL')
+def RL():
+    return render_template('RL.html')
+ 
+@app.route('/rl_concepts')
+def rl_concepts():
+    return render_template('rl_concepts.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
