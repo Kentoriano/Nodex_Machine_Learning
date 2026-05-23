@@ -6,7 +6,7 @@ from models.iris_lda import train_model as train_lda_model, predict_species
 from models.logistic_Regression import train_logistic, predict_watch
 from models.unsupervised_algorithm import run_analysis
 from models.K_means_steps import run_kmeans_steps
-
+from models.q_learning_maze import get_rl_results
 
 unsupervised_results = run_analysis()
 
@@ -157,6 +157,11 @@ def RL():
 @app.route('/rl_concepts')
 def rl_concepts():
     return render_template('rl_concepts.html')
+
+@app.route('/rl_agent')
+def rl_agent():
+    data = get_rl_results()
+    return render_template('rl_agent.html', data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)
