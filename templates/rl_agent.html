@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL – Intelligent Agent Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .metric-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #58a6ff;
+        }
+        .metric-card .label {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-top: 0.2rem;
+        }
+        .metric-card.green .value  { color: #3fb950; }
+        .metric-card.purple .value { color: #d2a8ff; }
+        .metric-card.yellow .value { color: #e3b341; }
+        .metric-card.red .value    { color: #f78166; }
+
+        .section-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-card h5 {
+            color: #58a6ff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .maze-grid {
+            display: inline-grid;
+            gap: 3px;
+        }
+        .maze-row { display: flex; gap: 3px; }
+        .maze-cell {
+            width: 36px; height: 36px;
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: bold;
+        }
+        .cell-free  { background: #21262d; border: 1px solid #30363d; }
+        .cell-wall  { background: #30363d; }
+        .cell-goal  { background: #238636; color: white; }
+        .cell-start { background: #21262d; border: 1px solid #30363d; color: #e3b341; }
+        .cell-path  { background: rgba(88,166,255,0.18); border: 1px solid #58a6ff; color: #58a6ff; }
+
+        .q-table-wrap { overflow-x: auto; }
+        .q-table th { background: #161b22; color: #8b949e; font-size: 0.8rem; }
+        .q-table td { font-size: 0.82rem; }
+        .best-action { color: #3fb950; font-weight: 600; }
+
+        .summary-table th { background: #161b22; }
+        .badge-success { background: #238636; }
+        .badge-fail    { background: #6e2a1c; }
+
+        .graph-img { border-radius: 8px; border: 1px solid #30363d; width: 100%; }
+        .nav-sidebar a.active { background: #21262d; color: #58a6ff !important; }
+    </style>
+</head>
+<body class="text-white">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ── Top header ──────────────────────────────────────────────────────────── -->
+<div class="container">
+    <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-3 pt-1"><h6>Reinforcement Learning</h6></div>
+            <div class="col-6 text-center">
+                <h5 class="blog-header-logo text-decoration-none">Nodex Secure Software</h5>
+            </div>
+            <div class="col-3 text-center"><a class="link-secondary" href="#">Sign up</a></div>
+        </div>
+    </header>
+</div>
+
+<!-- ── Top nav ─────────────────────────────────────────────────────────────── -->
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-around">
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('home') }}">Home</a>
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('SML') }}">Supervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis" href="{{ url_for('UML') }}">Unsupervised Machine Learning</a>
+        <a class="nav-item nav-link link-body-emphasis active" href="{{ url_for('RL') }}">Reinforcement Learning</a>
+    </nav>
+</div>
+
+<!-- ── Layout ──────────────────────────────────────────────────────────────── -->
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <nav class="col-md-2 border-end py-4 d-flex flex-column gap-2">
+            <a href="{{ url_for('rl_concepts') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Basic Concepts</a>
+            <a href="{{ url_for('rl_agent') }}"   class="nav-link link-body-emphasis px-3 py-2 rounded active">Intelligent Agent Application</a>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-10 py-4 px-4">
+
+            <h4 class="mb-1">Intelligent Agent Application</h4>
+            <p class="text-secondary mb-4">
+                A Q-Learning agent trained to navigate a 7×7 maze from start (S) to goal (G),
+                learning the optimal path through trial and error across 600 episodes.
+            </p>
+
+            <!-- ── 1. Problem Context ──────────────────────────────────────── -->
+            <div class="section-card" id="context">
+                <h5>🧩 Problem Context</h5>
+                <div class="row g-3">
+                    <div class="col-md-7">
+                        <p>
+                            The agent is a <strong>robot navigating a maze</strong>. Placed at the
+                            top-left cell <span style="color:#e3b341">(S)</span>, it must reach the
+                            bottom-right cell <span style="color:#3fb950">(G)</span> while avoiding
+                            walls, in the fewest steps possible.
+                        </p>
+                        <p>
+                            The agent has no prior knowledge of the maze layout. It discovers the
+                            optimal route purely through interaction: trying actions, receiving rewards
+                            or penalties, and updating its internal Q-table. Over episodes, its
+                            behavior transitions from random exploration to precise navigation.
+                        </p>
+                        <h6 class="mt-3" style="color:#8b949e">Environment Configuration</h6>
+                        <ul class="text-secondary" style="font-size:0.9rem">
+                            <li><strong style="color:white">States:</strong> {{ data.metrics.n_states }} — each cell is a unique state (7×7 grid)</li>
+                            <li><strong style="color:white">Actions:</strong> {{ data.metrics.n_actions }} — Up, Down, Left, Right</li>
+                            <li><strong style="color:white">Goal state:</strong> cell (6,6) — bottom-right corner</li>
+                            <li><strong style="color:white">Wall penalty:</strong> −10 &nbsp;|&nbsp; <strong style="color:white">Step cost:</strong> −1 &nbsp;|&nbsp; <strong style="color:white">Goal reward:</strong> +100</li>
+                            <li><strong style="color:white">Episodes:</strong> {{ data.metrics.episodes }} &nbsp;|&nbsp; α = {{ data.metrics.alpha }} &nbsp;|&nbsp; γ = {{ data.metrics.gamma }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
+                        <p class="text-secondary mb-2" style="font-size:0.8rem">Maze layout (arrows = learned best action)</p>
+                        <div class="maze-grid">
+                            {% set path_set = data.optimal_path %}
+                            {% for r in range(7) %}
+                            <div class="maze-row">
+                                {% for c in range(7) %}
+                                    {% set s = r * 7 + c %}
+                                    {% set cell_val = data.maze[r][c] %}
+                                    {% if cell_val == 1 %}
+                                        <div class="maze-cell cell-wall"></div>
+                                    {% elif cell_val == 2 %}
+                                        <div class="maze-cell cell-goal">G</div>
+                                    {% elif s == 0 %}
+                                        <div class="maze-cell cell-start">S</div>
+                                    {% elif s in path_set %}
+                                        <div class="maze-cell cell-path">·</div>
+                                    {% else %}
+                                        <div class="maze-cell cell-free"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <p class="text-secondary mt-2" style="font-size:0.75rem">
+                            <span style="color:#58a6ff">■</span> Path &nbsp;
+                            <span style="color:#30363d;background:#30363d">■</span> Wall &nbsp;
+                            <span style="color:#238636">■</span> Goal &nbsp;
+                            <span style="color:#e3b341">S</span> Start
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 2. Training Results / Metrics ─────────────────────────── -->
+            <div class="section-card" id="metrics">
+                <h5>📊 Training Results & Performance Metrics</h5>
+                <div class="row g-3 mb-3">
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card">
+                            <div class="value">{{ data.metrics.n_states }}</div>
+                            <div class="label">Total States</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card purple">
+                            <div class="value">{{ data.metrics.episodes }}</div>
+                            <div class="label">Episodes</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card yellow">
+                            <div class="value">{{ data.metrics.best_reward }}</div>
+                            <div class="label">Best Reward</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card">
+                            <div class="value">{{ data.metrics.avg_reward_last100 }}</div>
+                            <div class="label">Avg Reward (last 100)</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card green">
+                            <div class="value">{{ data.metrics.success_rate_last100 }}%</div>
+                            <div class="label">Success Rate (last 100)</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="metric-card {% if data.metrics.reached_goal %}green{% else %}red{% endif %}">
+                            <div class="value">{{ data.metrics.optimal_path_length }}</div>
+                            <div class="label">Optimal Path Length</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Episode summaries -->
+                <h6 class="mt-3" style="color:#8b949e">Episode Summaries</h6>
+                <div class="table-responsive">
+                    <table class="table table-dark table-sm table-bordered summary-table">
+                        <thead>
+                            <tr>
+                                <th>Episode</th>
+                                <th>Total Reward</th>
+                                <th>Steps</th>
+                                <th>Reached Goal</th>
+                                <th>Epsilon (ε)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in data.summaries %}
+                            <tr>
+                                <td>{{ s.episode }}</td>
+                                <td>{{ s.total_reward }}</td>
+                                <td>{{ s.steps }}</td>
+                                <td>
+                                    {% if s.success %}
+                                        <span class="badge badge-success">✓ Yes</span>
+                                    {% else %}
+                                        <span class="badge badge-fail">✗ No</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ s.epsilon }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ── 3. Q-Table Sample ──────────────────────────────────────── -->
+            <div class="section-card" id="qtable">
+                <h5>📋 Learned Q-Table (Sample)</h5>
+                <p class="text-secondary" style="font-size:0.85rem">
+                    Each row shows the Q-values the agent assigned to each action from that state after training.
+                    The <span style="color:#3fb950">Best Action</span> is the one the agent would choose (max Q-value).
+                </p>
+                <div class="q-table-wrap">
+                    <table class="table table-dark table-sm table-bordered q-table">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Position</th>
+                                <th>Q(Up)</th>
+                                <th>Q(Down)</th>
+                                <th>Q(Left)</th>
+                                <th>Q(Right)</th>
+                                <th>Best Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data.q_table_sample %}
+                            <tr>
+                                <td>{{ row.state }}</td>
+                                <td>{{ row.pos }}</td>
+                                <td>{{ row.Up }}</td>
+                                <td>{{ row.Down }}</td>
+                                <td>{{ row.Left }}</td>
+                                <td>{{ row.Right }}</td>
+                                <td class="best-action">{{ row.best_action }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ── 4. Visualizations ─────────────────────────────────────── -->
+            <div class="section-card" id="visualizations">
+                <h5>📈 Visualizations</h5>
+
+                <div class="row g-4">
+                    <div class="col-md-12">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Reward Progression</p>
+                        <img src="data:image/png;base64,{{ data.graphs.reward_progression }}" class="graph-img" alt="Reward Progression">
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Success Rate Evolution</p>
+                        <img src="data:image/png;base64,{{ data.graphs.success_rate }}" class="graph-img" alt="Success Rate">
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Epsilon Decay</p>
+                        <img src="data:image/png;base64,{{ data.graphs.epsilon_decay }}" class="graph-img" alt="Epsilon Decay">
+                    </div>
+                    <div class="col-md-12">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Steps per Episode</p>
+                        <img src="data:image/png;base64,{{ data.graphs.steps_per_episode }}" class="graph-img" alt="Steps per Episode">
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Optimal Path Learned</p>
+                        <img src="data:image/png;base64,{{ data.graphs.maze_path }}" class="graph-img" alt="Maze Path">
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-secondary mb-1" style="font-size:0.85rem">Q-value Heatmap + Best Actions</p>
+                        <img src="data:image/png;base64,{{ data.graphs.q_heatmap }}" class="graph-img" alt="Q Heatmap">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 5. Interpretation ─────────────────────────────────────── -->
+            <div class="section-card" id="interpretation">
+                <h5>🔍 Interpretation of Results</h5>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h6 style="color:#3fb950">What the Agent Learned</h6>
+                        <p class="text-secondary" style="font-size:0.9rem">
+                            Starting with completely random behavior (ε = 1.0), the agent explored the
+                            maze blindly, hitting walls and accumulating penalties. Over episodes, the
+                            Q-table accumulated experience: cells near the goal gained high Q-values,
+                            propagating backwards through the Bellman equation. By episode ~300, the
+                            agent consistently found the goal; by episode 600, its path was near-optimal.
+                        </p>
+                        <h6 style="color:#3fb950" class="mt-3">How Decisions Improved</h6>
+                        <p class="text-secondary" style="font-size:0.9rem">
+                            Early episodes show high variance in reward (many wall collisions, no goal
+                            reached). As epsilon decayed, the agent shifted from exploration to
+                            exploitation of the best-known path. The "steps per episode" chart shows
+                            this clearly: hundreds of steps early on, converging to the optimal path
+                            length as training matured.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 style="color:#58a6ff">Advantages of Q-Learning</h6>
+                        <ul class="text-secondary" style="font-size:0.9rem">
+                            <li>No prior model of the environment needed (model-free).</li>
+                            <li>Guaranteed convergence to the optimal policy in discrete, finite MDPs.</li>
+                            <li>Simple to implement; interpretable Q-table for small state spaces.</li>
+                            <li>Off-policy: learns from any experience, including random exploration.</li>
+                        </ul>
+                        <h6 style="color:#f78166" class="mt-3">Limitations</h6>
+                        <ul class="text-secondary" style="font-size:0.9rem">
+                            <li>Does not scale to large or continuous state spaces (curse of dimensionality).</li>
+                            <li>Requires many episodes to converge in complex environments.</li>
+                            <li>Static maze: does not generalize to environments that change over time.</li>
+                            <li>No function approximation; each state is treated independently.</li>
+                        </ul>
+                        <h6 style="color:#d2a8ff" class="mt-3">Possible Improvements</h6>
+                        <ul class="text-secondary" style="font-size:0.9rem">
+                            <li>Replace Q-table with a neural network → <strong>Deep Q-Network (DQN)</strong>.</li>
+                            <li>Add experience replay and target networks for stability.</li>
+                            <li>Use Double Q-Learning to reduce overestimation bias.</li>
+                            <li>Implement a dynamic maze that changes between episodes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-2 mb-4">
+                <a href="{{ url_for('rl_concepts') }}" class="btn btn-custom">← Back to Basic Concepts</a>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>
