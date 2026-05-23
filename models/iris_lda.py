@@ -90,7 +90,7 @@ def plot_roc_curve(model, X_test, y_test):
 
 
 def train_model():
-    data = pd.read_csv("data/iris.csv")
+    data = pd.read_csv("data/Iris.csv")
     X = data[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
     y = data["Species"]
 
