@@ -42,7 +42,7 @@
 
             <nav class="col-md-2 border-end py-4 d-flex flex-column gap-2">
                 <a href="{{ url_for('rl_concepts') }}" class="nav-link link-body-emphasis px-3 py-2 rounded">Basic Concepts</a>
-                <a href="#" class="nav-link link-body-emphasis px-3 py-2 rounded text-secondary">Intelligent Agent Application</a>
+                <a href="rl_agent" class="nav-link link-body-emphasis px-3 py-2 rounded text-secondary">Intelligent Agent Application</a>
             </nav>
 
             <main class="col-md-10 py-4 px-4">
@@ -69,7 +69,7 @@
                                 training episodes, reward progression, learned policy, and
                                 interactive visualizations.
                             </p>
-                            <span class="badge bg-secondary mt-2">Coming soon</span>
+                            <a href="{{ url_for('rl_agent') }}" class="btn btn-custom mt-2">Go to Application</a>
                         </div>
                     </div>
                 </div>
